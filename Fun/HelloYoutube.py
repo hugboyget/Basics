@@ -4,38 +4,45 @@
 #@File : HelloYoutube.py
 #@Software: PyCharm
 
+# radio button = similar to checkbox, but you can only select one from a group
+
 from tkinter import *
 
-def display():
-    if x.get() == "YES":
-        print("you agree !")
+def order():
+    if x.get() == 0:
+        print("You ordered pizza !")
+    elif x.get() == 1:
+        print("You ordered hamburger")
     else:
-        print("you don't agree:(")
-
-
+        print("You ordered hotdog !")
 window = Tk()
 
-x = StringVar()
 
-love_photo = PhotoImage(file='icon_love.png')
+food = ["pizza", "hamburger", "hotdog"]
 
-check_button = Checkbutton(window,
-                           text="I agree with you.",
-                           variable=x,
-                           onvalue="YES",
-                           offvalue="NO",
-                           command=display,
-                           font=('Arial', 20),
-                           fg='red',
-                           bg='black',
-                           activeforeground='black',#点击时的颜色变化
-                           activebackground='red',
-                           padx=25,
-                           pady=25,
-                           bd=20,
-                           image=love_photo,
-                           compound='left')
+pizzaImage = PhotoImage(file="icon_love.png")
+hamburgerImage = PhotoImage(file="icon_love.png")
+hotdogImage = PhotoImage(file="icon_love.png")
+foodImages = [pizzaImage, hamburgerImage, hotdogImage]
 
-check_button.pack()
+
+x = IntVar()
+
+for index in range(len(food)):
+    radiobutton = Radiobutton(window,
+                              text=food[index], #adds text to radio buttons
+                              variable=x, #groups radiobuttons together if they share the variable
+                              value=index, #assigns each radiobutton a different value
+                              padx=25, #adds padding on x-axis
+                              font=('Impact', 50),
+                              image=foodImages[index],
+                              compound='left',
+                              indicatoron=0, #eliminate circle indicators
+                              width=375, #sets width of radio buttons
+                              command=order #set command of radiobutton to funtion
+                              )
+    radiobutton.pack(anchor=W)
+
+
 window.mainloop()
 
