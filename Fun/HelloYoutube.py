@@ -6,40 +6,36 @@
 
 from tkinter import *
 
-#entry widget = textbox that accept a signal line of user input
+def display():
+    if x.get() == "YES":
+        print("you agree !")
+    else:
+        print("you don't agree:(")
 
-def submit():
-    username = entry.get()
-    print("hello " + username)
-
-
-def delete():
-    entry.delete(0, END)
-
-def backspace():
-    entry.delete(len(entry.get())-1, END)
 
 window = Tk()
 
-entry = Entry(window,
-              font=("Arial", 50),
-              bg="pink",
-              )
+x = StringVar()
 
+love_photo = PhotoImage(file='icon_love.png')
 
-#entry.config(state=DISABLED) #禁止输入
-#entry.config(show="*") #隐藏显示
-entry.insert(0, 'Spongebob') #默认值
-entry.pack(side=LEFT)
+check_button = Checkbutton(window,
+                           text="I agree with you.",
+                           variable=x,
+                           onvalue="YES",
+                           offvalue="NO",
+                           command=display,
+                           font=('Arial', 20),
+                           fg='red',
+                           bg='black',
+                           activeforeground='black',#点击时的颜色变化
+                           activebackground='red',
+                           padx=25,
+                           pady=25,
+                           bd=20,
+                           image=love_photo,
+                           compound='left')
 
-submit_button = Button(window, text="submit", command=submit, bg="green")
-submit_button.pack(side=RIGHT)
-
-delete_button = Button(window, text="delete", command=delete, bg="red")
-delete_button.pack(side=RIGHT)
-
-backspace_button = Button(window, text="backspace", command=backspace, bg="yellow")
-backspace_button.pack(side=RIGHT)
-
+check_button.pack()
 window.mainloop()
 
