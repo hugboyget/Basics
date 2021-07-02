@@ -6,14 +6,25 @@
 
 from tkinter import *
 
-window = Tk() #instantiate an instance of a window
+window = Tk()
 
-window.geometry("490x490")
-window.title("Bro Code first GUI program")
+photo = PhotoImage(file='lo.gif')
 
-icon = PhotoImage(file="lo.gif")# PhotoImage图片必须gif格式
-window.iconphoto(True, icon)
-window.config(background="black")
 
-window.mainloop() #place window on computer screen. listen for events
+#label = an area widget that holds text and/or an image within a window
 
+label = Label(window,
+              text="Hello World !",
+              font=('Arial', 40, 'bold'),
+              fg='#00FF00',
+              background='black',
+              relief=RAISED,
+              bd=10,
+              padx=20,
+              pady=20,
+              image=photo,
+              compound='top')
+label.pack()
+#label.place(x=100, y=100)
+
+window.mainloop()
