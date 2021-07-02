@@ -6,33 +6,40 @@
 
 from tkinter import *
 
-# button = you click it, then it does stuff
+#entry widget = textbox that accept a signal line of user input
 
-count = 0
+def submit():
+    username = entry.get()
+    print("hello " + username)
 
-def click():
-    global count
-    count += 1
-    print(count)
-    print("You clicked the button !")
+
+def delete():
+    entry.delete(0, END)
+
+def backspace():
+    entry.delete(len(entry.get())-1, END)
 
 window = Tk()
 
-photo = PhotoImage(file='icon_love.png')
+entry = Entry(window,
+              font=("Arial", 50),
+              bg="pink",
+              )
 
 
-button = Button(window,
-                text='click me !',
-                command=click,
-                font=("Comic Sans", 30),
-                fg="#00FF00",
-                bg="black",
-                activeforeground="#00FF00",
-                activebackground="black",
-                #state=DISABLED,
-                image=photo,
-                compound='top')
-button.pack()
+#entry.config(state=DISABLED) #禁止输入
+#entry.config(show="*") #隐藏显示
+entry.insert(0, 'Spongebob') #默认值
+entry.pack(side=LEFT)
+
+submit_button = Button(window, text="submit", command=submit, bg="green")
+submit_button.pack(side=RIGHT)
+
+delete_button = Button(window, text="delete", command=delete, bg="red")
+delete_button.pack(side=RIGHT)
+
+backspace_button = Button(window, text="backspace", command=backspace, bg="yellow")
+backspace_button.pack(side=RIGHT)
 
 window.mainloop()
 
