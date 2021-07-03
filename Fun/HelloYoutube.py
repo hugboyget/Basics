@@ -8,40 +8,47 @@
 
 from tkinter import *
 
-def order():
-    if x.get() == 0:
-        print("You ordered pizza !")
-    elif x.get() == 1:
-        print("You ordered hamburger")
-    else:
-        print("You ordered hotdog !")
+def submit():
+    print("The temperature is: "+ str(scale.get()) + " degrees C")
+
+
 window = Tk()
 
 
-food = ["pizza", "hamburger", "hotdog"]
 
-pizzaImage = PhotoImage(file="icon_love.png")
-hamburgerImage = PhotoImage(file="icon_love.png")
-hotdogImage = PhotoImage(file="icon_love.png")
-foodImages = [pizzaImage, hamburgerImage, hotdogImage]
+hotImage = PhotoImage(file='hot.png')
+hotLabel = Label(image=hotImage)
+hotLabel.pack()
 
 
-x = IntVar()
 
-for index in range(len(food)):
-    radiobutton = Radiobutton(window,
-                              text=food[index], #adds text to radio buttons
-                              variable=x, #groups radiobuttons together if they share the variable
-                              value=index, #assigns each radiobutton a different value
-                              padx=25, #adds padding on x-axis
-                              font=('Impact', 50),
-                              image=foodImages[index],
-                              compound='left',
-                              indicatoron=0, #eliminate circle indicators
-                              width=375, #sets width of radio buttons
-                              command=order #set command of radiobutton to funtion
-                              )
-    radiobutton.pack(anchor=W)
+scale = Scale(window,
+              from_=100,
+              to=-20,
+              length=500,
+              orient=VERTICAL, #垂直方向
+              font=('Consolas', 25),
+              tickinterval=10, #刻度
+              #showvalue=0, #隐藏
+              resolution=5, #增量(解析度)
+              troughcolor='yellow',#底色
+              fg='red',
+              bg='black'
+              )
+#scale.set(10) #默认值
+scale.set((scale['from']-scale['to'])/2+scale['to'])
+scale.pack()
+
+
+coldImage = PhotoImage(file='cold.png')
+coldLabel = Label(image=coldImage)
+coldLabel.pack()
+
+
+button = Button(window, text="submit", command=submit)
+button.pack()
+
+
 
 
 window.mainloop()
