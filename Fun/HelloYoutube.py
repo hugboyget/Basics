@@ -4,49 +4,55 @@
 #@File : HelloYoutube.py
 #@Software: PyCharm
 
-# radio button = similar to checkbox, but you can only select one from a group
-
+# listbox = A list of selectabel text items within it's own container
 from tkinter import *
 
 def submit():
-    print("The temperature is: "+ str(scale.get()) + " degrees C")
+    print("You have ordered:")
+    for i in listbox.curselection():
+        print(listbox.get(i))
+
+def add():
+    listbox.insert(listbox.size(), entryBox.get())
+    listbox.config(height=listbox.size())
+
+def delete():
+    for i in reversed(listbox.curselection()):
+        listbox.delete(i)
+        listbox.config(height=listbox.size())
 
 
 window = Tk()
 
+listbox = Listbox(window,
+                  bg="pink",
+                  font=("Constantia", 15),
+                  width=12,
+                  selectmode=MULTIPLE)
+listbox.pack()
+
+listbox.insert(1, "pizza")
+listbox.insert(2, "pasta")
+listbox.insert(3, "garlic bread")
+listbox.insert(4, "soup")
+listbox.insert(5, "salad")
+
+listbox.config(height=listbox.size())
 
 
-hotImage = PhotoImage(file='hot.png')
-hotLabel = Label(image=hotImage)
-hotLabel.pack()
+entryBox = Entry(window,
+                 bg='green')
+entryBox.pack()
 
 
+submitButton = Button(window, text="submit", command=submit)
+submitButton.pack()
 
-scale = Scale(window,
-              from_=100,
-              to=-20,
-              length=500,
-              orient=VERTICAL, #垂直方向
-              font=('Consolas', 25),
-              tickinterval=10, #刻度
-              #showvalue=0, #隐藏
-              resolution=5, #增量(解析度)
-              troughcolor='yellow',#底色
-              fg='red',
-              bg='black'
-              )
-#scale.set(10) #默认值
-scale.set((scale['from']-scale['to'])/2+scale['to'])
-scale.pack()
+addButton = Button(window, text="add", command=add)
+addButton.pack()
 
-
-coldImage = PhotoImage(file='cold.png')
-coldLabel = Label(image=coldImage)
-coldLabel.pack()
-
-
-button = Button(window, text="submit", command=submit)
-button.pack()
+deleteButton = Button(window, text="delete", command=delete)
+deleteButton.pack()
 
 
 
