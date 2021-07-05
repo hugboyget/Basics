@@ -4,17 +4,25 @@
 #@File : HelloYoutube.py
 #@Software: PyCharm
 
+# text widget = funtions like a text area, you can enter multiple lines of text
 from tkinter import *
-from tkinter import colorchooser
 
-def click():
-    color = colorchooser.askcolor()
-    print(color)
-    colorHex = (color[1])
-    window.config(bg=colorHex)#change background
+def submit():
+    input = text.get("1.0", END)
+    print(input)
 
 window = Tk()
-window.geometry("420x420")
-button = Button(text='click me', command=click)
+
+text = Text(window,
+            bg="light green",
+            font=("Ink Free", 25),
+            height=8,
+            width=20)
+text.pack()
+
+button = Button(window, text="submit", command=submit)
 button.pack()
+
+
+
 window.mainloop()
