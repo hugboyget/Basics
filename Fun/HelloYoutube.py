@@ -4,21 +4,17 @@
 #@File : HelloYoutube.py
 #@Software: PyCharm
 
-# frame = a rectangular container to group and hold widgets
+
 
 from tkinter import *
 
-window = Tk()
+def create_window():
+    #Tk() = new independent window
+    #Toplevel = new window 'on top' of other windows
+    new_window = Tk()
+    old_window.destroy()
 
-frame = Frame(window, bg="black", bd=5, relief=SUNKEN)
-frame.place(x=60, y=60)
+old_window = Tk()
+Button(old_window, text="new a window", command=create_window).pack()
 
-Button(frame, text="W", font=("Consolas", 25), bg='light green').pack(side=TOP)
-Button(frame, text="A", font=("Consolas", 25), bg='light green').pack(side=LEFT)
-Button(frame, text="S", font=("Consolas", 25), bg='light green').pack(side=LEFT)
-Button(frame, text="D", font=("Consolas", 25), bg='light green').pack(side=LEFT)
-
-
-
-
-window.mainloop()
+old_window.mainloop()
