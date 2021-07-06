@@ -5,30 +5,40 @@
 #@Software: PyCharm
 
 from tkinter import *
-from tkinter import filedialog
 
+def openFile():
+    print("File has been opened!")
 def saveFile():
-    file = filedialog.asksaveasfile(initialdir="E:\\PYTHON\\Basics\\Fun",
-                                    defaultextension='.txt',
-                                    filetypes=[
-                                        ("Text file", ".txt"),
-                                        ("HTML file", ".html"),
-                                        ("All files", ".*"),
-                                    ]
-                                    )
-    if file is None:
-        return
-    filetext = str(text.get(1.0, END))
-    #filetext = input("Enter some words to save:") # enter in Console
-    file.write(filetext)
-    file.close
-
+    print("File has been saved!")
+def cut():
+    print("You cut some text !")
+def copy():
+    print("You copy some text !")
+def paste():
+    print("You paste some text !")
 window = Tk()
 
-button = Button(text='save', command=saveFile)
-button.pack()
+openImage = PhotoImage(file="open.png")
+saveImage = PhotoImage(file="save.png")
+exitImage = PhotoImage(file="exit.png")
 
-text = Text(window)
-text.pack()
+menubar = Menu(window)
+window.config(menu=menubar)
+
+fileMenu = Menu(menubar, tearoff=0, font=("MV Boli", 15))
+menubar.add_cascade(label="File", menu=fileMenu)
+
+fileMenu.add_command(label="Open", command=openFile, image=openImage, compound="left")
+fileMenu.add_command(label="Save", command=saveFile, image=saveImage, compound="left")
+fileMenu.add_separator()#分隔线
+fileMenu.add_command(label="Exit", command=quit, image=exitImage, compound="left")
+
+editMenu = Menu(menubar, tearoff=0, font=("MV Boli", 15))
+menubar.add_cascade(label="Edit", menu=editMenu)
+
+editMenu.add_command(label="Cut", command=cut)
+editMenu.add_command(label="Copy", command=copy)
+editMenu.add_command(label="Paste", command=paste)
+
 
 window.mainloop()
