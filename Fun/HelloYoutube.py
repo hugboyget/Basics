@@ -4,23 +4,25 @@
 #@File : HelloYoutube.py
 #@Software: PyCharm
 
-
-
 from tkinter import *
-from tkinter import ttk
+
+#grid() = geometry manager that organizes widgets in a table-like structure in a parent
 
 window = Tk()
 
-notebook = ttk.Notebook(window) #widget that manges a collection of windows/displays
-tab1 = Frame(notebook) # new frame for tabl
-tab2 = Frame(notebook) # new frame for tab2
+titleLabel = Label(window, text="Enter your info", font=("Arial", 25)).grid(row=0, column=0, columnspan=2)
 
-notebook.add(tab1, text="Tab 1")
-notebook.add(tab2, text="Tab 2")
-notebook.pack(expand=True, fill="both")
-#expand = expand to fill any space not otherwise
-#fill = fill space on x and y axis
+firstNameLabel = Label(window, text="First name:", width=20, bg="red").grid(row=1, column=0)
+firstNameEntry = Entry(window).grid(row=1, column=1)
 
-Label(tab1, text="this is tab#1", width=60, height=20).pack()
-Label(tab2, text="this is tab#2", width=60, height=20).pack()
+lastNameLabel = Label(window, text="Last name:", width=20, bg="blue").grid(row=2, column=0)
+lastNameEntry = Entry(window).grid(row=2, column=1)
+
+emailNameLabel = Label(window, text="Email:", width=20, bg="pink").grid(row=3, column=0)
+emailNameEntry = Entry(window).grid(row=3, column=1)
+
+submitButton = Button(window, text="Submit").grid(row=4, column=0, columnspan=2)
+
 window.mainloop()
+
+
