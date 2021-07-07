@@ -5,23 +5,36 @@
 #@Software: PyCharm
 
 from tkinter import *
+from tkinter.ttk import *
+import time
 
-#grid() = geometry manager that organizes widgets in a table-like structure in a parent
+
+def start():
+    GB = 10
+    download = 0
+    speed = 1
+    while(download<GB):
+        time.sleep(0.05)
+        bar['value'] += 10
+        download+=speed
+        percent.set(str((download/GB)*100)+"%")
+        text.set(str(download)+'/'+str(GB)+" GB completed")
+        window.update_idletasks()
+
+
 
 window = Tk()
 
-titleLabel = Label(window, text="Enter your info", font=("Arial", 25)).grid(row=0, column=0, columnspan=2)
+percent = StringVar()
+text = StringVar()
 
-firstNameLabel = Label(window, text="First name:", width=20, bg="red").grid(row=1, column=0)
-firstNameEntry = Entry(window).grid(row=1, column=1)
+bar = Progressbar(window, orient=HORIZONTAL, length=300)
+bar.pack(pady=10)
 
-lastNameLabel = Label(window, text="Last name:", width=20, bg="blue").grid(row=2, column=0)
-lastNameEntry = Entry(window).grid(row=2, column=1)
 
-emailNameLabel = Label(window, text="Email:", width=20, bg="pink").grid(row=3, column=0)
-emailNameEntry = Entry(window).grid(row=3, column=1)
-
-submitButton = Button(window, text="Submit").grid(row=4, column=0, columnspan=2)
+percentLabel = Label(window, textvariabl=percent).pack()
+taskLabel = Label(window, textvariable=text).pack()
+button = Button(window, text="download", command=start).pack()
 
 window.mainloop()
 
