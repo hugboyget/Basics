@@ -5,28 +5,37 @@
 #@Software: PyCharm
 
 from tkinter import *
+import time
 
-def move_up(event):
-    canvas.move(myimage, 0, -100)
-def move_down(event):
-    canvas.move(myimage, 0, 100)
-def move_left(event):
-    canvas.move(myimage, -100, 0)
-def move_right(event):
-    canvas.move(myimage, 100, 0)
+WIDTH = 600
+HEIGHT = 400
+
+xVelocity =1
+yVelocity =2
 
 window = Tk()
 
-window.bind("<w>", move_up)
-window.bind("<s>", move_down)
-window.bind("<a>", move_left)
-window.bind("<d>", move_right)
-
-canvas = Canvas(window, width=500, height=500)
+canvas = Canvas(window, width=WIDTH, height=HEIGHT)
 canvas.pack()
+background_photo = PhotoImage(file='city.png')
+background = canvas.create_image(0, 0, image=background_photo)
 
-photoimage = PhotoImage(file='plain.png')
-myimage = canvas.create_image(0, 0, image=photoimage, anchor=NW)
+photo_image = PhotoImage(file='airship.png')
+my_image = canvas.create_image(0, 0, image=photo_image, anchor=NW)
 
+image_width = photo_image.width()
+image_height = photo_image.height()
+
+while True:
+    coordinates = canvas.coords(my_image)
+    print("飞船当前坐标:"+str(coordinates))
+    if coordinates[0]>=(WIDTH-image_width) or coordinates[0]<0:
+        xVelocity = -xVelocity
+    if coordinates[1]>=(HEIGHT-image_height) or coordinates[1]<0:
+        yVelocity = -yVelocity
+
+    canvas.move(my_image, xVelocity, yVelocity)
+    window.update()
+    time.sleep(0.01)
 
 window.mainloop()
