@@ -7,21 +7,19 @@
 from tkinter import *
 
 def doSomething(event):
-    #print("dit a thing")
-    print("Hello. !")
-    print("You did a thing:", str(event.x)+","+str(event.y))
-    label.config(text=event.keysym)
+    print("You did a thing:" + str(event.x) + "," + str(event.y))
 
 window = Tk()
 
-#window.bind("<Key>", doSomething)
-window.bind("<Button-1>", doSomething)#mouse left click
-window.bind("<Button-2>", doSomething)#scroll wheel
-window.bind("<Button-3>", doSomething)#right mouse click
-window.bind("<Leave>", doSomething)#leave the window
-window.bind("<Enter>", doSomething)#Enter the window
-window.bind("<Motion>", doSomething)#where the mouse moved
-label = Label(window, font=("Helvetica", 100))
-label.pack()
+window.bind("<Button-1>", doSomething) #left mouse click
+#window.bind("<Button-2>", doSomething) #scroll whell
+#window.bind("<Button-3>", doSomething) #right mouse click
+#window.bind("<ButtonRealease>", doSomething)
+window.bind("<Enter>", doSomething) #enter the window
+window.bind("<Leave>", doSomething) #leave the window
+window.bind("<Motion>", doSomething) #Where the mouse moved
+
+
+
 
 window.mainloop()
