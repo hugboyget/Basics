@@ -6,37 +6,27 @@
 
 from tkinter import *
 
-def drag_start(event):
-    widget = event.widget
-    widget.startX = event.x
-    widget.startY = event.y
-
-
-def drag_motion(event):
-    widget = event.widget
-    x = widget.winfo_x() - widget.startX + event.x
-    y = widget.winfo_y() - widget.startY + event.y
-    widget.place(x=x, y=y)
-    print("红/蓝 块(%d, %d)"%(x, y))
-
-
-
-
-
+def move_up(event):
+    label.place(x=label.winfo_x(), y=label.winfo_y()-100)
+def move_down(event):
+    label.place(x=label.winfo_x(), y=label.winfo_y()+100)
+def move_left(event):
+    label.place(x=label.winfo_x() - 100, y=label.winfo_y())
+def move_right(event):
+    label.place(x=label.winfo_x() + 100, y=label.winfo_y())
 
 window = Tk()
+window.geometry("500x500")
+window.config(bg="white")
 
-label = Label(window, bg="red", width=10, height=5)
+window.bind("<w>", move_up)
+window.bind("<s>", move_down)
+window.bind("<a>", move_left)
+window.bind("<d>", move_right)
+
+
+myimage = PhotoImage(file='plain.png')
+label = Label(window, image=myimage, bg='white')
 label.place(x=0, y=0)
-
-label2 = Label(window, bg="blue", width=10, height=5)
-label2.place(x=100, y=100)
-
-
-label.bind("<Button-1>", drag_start)
-label.bind("<B1-Motion>", drag_motion)
-
-label2.bind("<Button-1>", drag_start)
-label2.bind("<B1-Motion>", drag_motion)
 
 window.mainloop()
