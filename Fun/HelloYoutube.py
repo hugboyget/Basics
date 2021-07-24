@@ -7,26 +7,26 @@
 from tkinter import *
 
 def move_up(event):
-    label.place(x=label.winfo_x(), y=label.winfo_y()-100)
+    canvas.move(myimage, 0, -100)
 def move_down(event):
-    label.place(x=label.winfo_x(), y=label.winfo_y()+100)
+    canvas.move(myimage, 0, 100)
 def move_left(event):
-    label.place(x=label.winfo_x() - 100, y=label.winfo_y())
+    canvas.move(myimage, -100, 0)
 def move_right(event):
-    label.place(x=label.winfo_x() + 100, y=label.winfo_y())
+    canvas.move(myimage, 100, 0)
 
 window = Tk()
-window.geometry("500x500")
-window.config(bg="white")
 
 window.bind("<w>", move_up)
 window.bind("<s>", move_down)
 window.bind("<a>", move_left)
 window.bind("<d>", move_right)
 
+canvas = Canvas(window, width=500, height=500)
+canvas.pack()
 
-myimage = PhotoImage(file='plain.png')
-label = Label(window, image=myimage, bg='white')
-label.place(x=0, y=0)
+photoimage = PhotoImage(file='plain.png')
+myimage = canvas.create_image(0, 0, image=photoimage, anchor=NW)
+
 
 window.mainloop()
