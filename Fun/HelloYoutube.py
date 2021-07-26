@@ -5,28 +5,34 @@
 #@Software: PyCharm
 
 from tkinter import *
-from Ball import *
-import time
+from time import *
+
+def update():
+    time_string = strftime("%I:%M:%S %p")
+    time_label.config(text=time_string)
+
+    day_string = strftime("%A")
+    day_label.config(text=day_string)
+
+    date_string = strftime("%B %d, %Y")
+    date_label.config(text=date_string)
+
+    time_label.after(1000, update)
+
+
+
 
 window = Tk()
 
-WIDTH = 600
-HEIGHT = 600
+time_label = Label(window, font=("Arial", 50), fg="green", bg="black")
+time_label.pack()
 
-canvas = Canvas(window, width=WIDTH, height=HEIGHT)
-window.update()
-canvas.pack()
+day_label = Label(window, font=("Ink Free", 25), fg="black", bg="white")
+day_label.pack()
 
-volley_ball = Ball(canvas, 0, 0, 100, 1, 1, "red")
-tennis_ball = Ball(canvas, 0, 0, 50, 4, 3, "yellow")
-basket_ball = Ball(canvas, 0, 0, 125, 8, 7, "orange")
+date_label = Label(window, font=("Ink Free", 30), fg="black", bg="white")
+date_label.pack()
 
-while True:
-
-    window.update()
-    volley_ball.move()
-    tennis_ball.move()
-    basket_ball.move()
-    time.sleep(0.01)
+update()
 
 window.mainloop()
