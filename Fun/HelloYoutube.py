@@ -4,35 +4,30 @@
 #@File : HelloYoutube.py
 #@Software: PyCharm
 
-from tkinter import *
-from time import *
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 
-def update():
-    time_string = strftime("%I:%M:%S %p")
-    time_label.config(text=time_string)
+# 第三方 SMTP 服务
+mail_host = "smtp.qq.com"  # 设置服务器
+mail_user = "1460***994"  # 用户名
+mail_pass = "vhf*********kjqarqgcid"  # 口令
 
-    day_string = strftime("%A")
-    day_label.config(text=day_string)
+sender = 'hu***oy@vip.qq.com'
+receivers = ['36147***61@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
-    date_string = strftime("%B %d, %Y")
-    date_label.config(text=date_string)
+message = MIMEText('内容xxxxxxxxx', 'plain', 'utf-8')
+message['From'] = Header("Bob", 'utf-8')
+message['To'] = Header("Alice", 'utf-8')
 
-    time_label.after(1000, update)
+subject = '标题'
+message['Subject'] = Header(subject, 'utf-8')
 
-
-
-
-window = Tk()
-
-time_label = Label(window, font=("Arial", 50), fg="green", bg="black")
-time_label.pack()
-
-day_label = Label(window, font=("Ink Free", 25), fg="black", bg="white")
-day_label.pack()
-
-date_label = Label(window, font=("Ink Free", 30), fg="black", bg="white")
-date_label.pack()
-
-update()
-
-window.mainloop()
+try:
+    smtpObj = smtplib.SMTP()
+    smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
+    smtpObj.login(mail_user, mail_pass)
+    smtpObj.sendmail(sender, receivers, message.as_string())
+    print("邮件发送成功")
+except smtplib.SMTPException:
+    print("Error: 无法发送邮件")
